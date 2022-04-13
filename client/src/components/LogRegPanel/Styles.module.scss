@@ -1,0 +1,34 @@
+@import "../../styles/utils.scss";
+
+.logPanel {
+    height: 500px;
+    background-color: #354e6a7b;
+    backdrop-filter: blur(14px);
+    max-width: 800px;
+    margin: 90px auto;
+    border: solid 2px #65798f;
+
+    .tabs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: stretch;
+        button {
+            padding: $medianil 0;
+            background-color: transparent;
+            font-family: $seccondary-font;
+            color: white;
+            font-size: 17px;
+            flex: 1;
+            text-align: center;
+            border: solid 1px #65798f;
+        }
+        .tabUnactive {
+            background-color:#1727397b;
+            cursor: pointer;
+        }
+        .tabActive {
+            border-bottom: none;
+        }
+    }
+}
