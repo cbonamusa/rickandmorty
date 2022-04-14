@@ -1,0 +1,37 @@
+@import "../../styles/utils.scss";
+
+.formContent {
+    display: flex;
+    justify-content: center;
+    margin: $medianil *5 $medianil *2;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        label {
+            display: flex;
+            flex-direction: row;
+            justify-content:end;
+            align-items: center;
+            margin-bottom: $medianil;
+            p {
+                color: white;
+                font-family: $main-font;
+                margin-right: $medianil;
+            }
+            input {
+                min-width: 250px;
+                padding: $medianil/2 $medianil/3;
+                border-radius: 6px;
+                background-color: #ff86b184;
+                border: solid 1px white;
+                color: white;
+            }
+        }
+        input[type="submit"]{
+            @include cta($seccondary);
+            width: 100%;
+        }
+    }
+}

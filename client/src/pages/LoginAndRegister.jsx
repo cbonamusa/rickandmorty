@@ -1,5 +1,5 @@
 import Header from "../components/Header"
-import LogRegPanel from "../components/LogRegPanel"
+import LogRegPanel from "../components/LogRegPanel";
 
 const LoginAndRegister = () => {
   return (

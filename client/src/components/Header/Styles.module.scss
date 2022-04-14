@@ -21,19 +21,7 @@
             width: 1170px;
         }
         .logoutCTA {
-            cursor: pointer;
-            background-color: $seccondary;
-            border: none;
-            border-radius: 3px;
-            padding: $medianil/3 $medianil;
-             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, 
-            rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-            &:hover {
-                background-color: darken($seccondary, 10%);
-            }
-            &:active {
-                box-shadow: rgb(52, 52, 55) 0px 20px 15px -20px inset;
-            }
+            @include cta($seccondary);
         }
     }
 }
