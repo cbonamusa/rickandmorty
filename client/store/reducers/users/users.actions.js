@@ -3,18 +3,24 @@ import actionTypes from "./users.actionTypes";
 /*
  * LogIn
  */
-const loginRequestAction = () => ({
-    type: actionTypes.LOGIN_REQ
+export const loginRequestAction = () => ({
+    type: actionTypes.LOGIN_REQUEST
 });
 
-const loginSuccessAction = () => ({
-    type: actionTypes.LOGIN_SUCCESS,
-    payload: { token }
+export const loginSuccessAction = (token) => ({
+    type: actionTypes.LOGGED_IN_SUCCESS,
+    payload: token
 });
 
+export const loginErrorAction = (error) => ({
+    type: actionTypes.LOGIN_FAILED,
+    payload: error
+})
 
-export default {
-    loginRequestAction,
-    loginSuccessAction,
-    loginErrorAction
-}
+/*
+ * LogOut
+ */
+export const logoutAction = () => ({
+    type: actionTypes.LOGOUT
+});
+

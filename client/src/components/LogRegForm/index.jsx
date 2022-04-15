@@ -1,7 +1,12 @@
 import styles from './Styles.module.scss';
 import { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { loginErrorAction, loginSuccessAction} from "../../../store/reducers/users/users.actions";
 
-/**
+import * as services from '../../../services/user.service';
+
+
+/*
  * Component Loging / Register Form
  * @component
  * @param form {string} String to load login form or register form
@@ -9,33 +14,44 @@ import { useState } from 'react'
  *  <LogRegForm form='login' /> 
  */
 const LogRegForm = ({form}) => {
-  //TODO: Do it with redux
+  //TODO: Login redux
+  const dispatch = useDispatch();
+  const [notification, setNotification] = useState({type: 'none', text: ''});
   const [userData, setUserData] = useState({
     username:'',
     email: '',
     password: ''
   })
-  const [notification, setNotification] = useState({type: 'none', text: ''});
-
-  const login = async (e) => {
-    e.preventDefault();
-    console.log('LOGIIIIN')
-
-  }
-
-  const register = async (e) => {
+  
+  const submitLogin = async (e) => {
     e.preventDefault();
     try {
-      const resp = await fetch(`http://localhost:5000/register`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
-      });
-      const json = await resp.json();
+      const { error, accessToken } = await services.loginRequest(userData);
+      if (error) {
+        setNotification({ type:'error', text: error.toString() });
+        dispatch(loginErrorAction(error));
+
+      } else {
+        setNotification({ type:'ok', text: 'Success' });
+        localStorage.setItem('token', accessToken);
+        sessionStorage.setItem('token', accessToken);
+        dispatch(loginSuccessAction(accessToken));
+      }
+
+    } catch(error) {
+      setNotification({ type:'error', text: error.toString() });
+    }
+  }
+
+  const submitRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const json = await services.registerRequest(userData);
       if (json.error) {
         setNotification({ type:'error', text:json.error.toString() })
       } else {
-        setNotification({ type:'ok', text: 'Success! Your user account is created' })
+        setNotification({ type:'ok', text: 'Success! Your user account is created' });
+        setUserData({username:'', email:'', password: ''});
       }
     } catch(error) {
       setNotification({ type:'error', text: error.toString() })
@@ -49,7 +65,7 @@ const LogRegForm = ({form}) => {
 
   return (
     <div className={styles.formContent}>
-     <form onSubmit={form === 'login' ? login : register }>
+     <form onSubmit={form === 'login' ? submitLogin : submitRegister }>
         <label>
           <p>Username</p>
           <input type="text" value={userData.username} onChange={(e) => setUserData((prev) => ({...prev, username:e.target.value}))}/>

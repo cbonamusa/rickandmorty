@@ -10,7 +10,7 @@ const Characters = () => {
     console.log('DATAAAAA', characters);
 
     useEffect(() => {
-        dispatch(loadCharacters())
+        dispatch(loadCharacters());
     }, [dispatch])
     return (
         <div>

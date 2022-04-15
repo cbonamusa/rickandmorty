@@ -1,5 +1,5 @@
 export default {
-    user: null,
+    isLoggedIn: false,
     token: "",
     isAuthenticated: false,
     favourites: null

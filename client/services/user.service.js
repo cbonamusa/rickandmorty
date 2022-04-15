@@ -1,24 +1,23 @@
-const baseUrl = 'http://localhost:5000/login'
+const loginUrl = 'http://localhost:5000/login'
+const registerUrl = 'http://localhost:5000/register'
 
 
-export const registerRequest = async (user) => {
-    const resp = await fetch(`http://localhost:5000/register`, {
+export const registerRequest = async ({email, password, username}) => {
+    const resp = await fetch(registerUrl, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
+        body: JSON.stringify({email, passport, username})
       });
       const json = await resp.json();
       return json;
 }
 
-const loginRequest = async (payload) => {
-    const res = await axios({
+export const loginRequest = async ({username, password}) => {
+    const resp = await fetch(loginUrl, {
         method: 'POST',
-        url: baseUrl,
-        data: payload,
         headers: { "Content-Type": "application/json" },
-    })
-    return res.data
+        body: JSON.stringify({username, password})
+      });
+      const token = await resp.json();
+      return token;
 }
-
-export default loginRequest

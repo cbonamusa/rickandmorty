@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import { useDispatch, useSelector} from 'react-redux';
 
 import Header from "./components/Header";
 import Characters from './pages/Characters';
@@ -12,13 +13,9 @@ import './styles/globalStyles.scss';
 
 const App = (props) => {
   //TODO redux!
-  const token = localStorage.getItem('token')
-  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-
-  const logIn = (token) => {
-    localStorage.setItem('token', token);
-    setIsLoggedIn(true)
-  }
+  //const token = localStorage.getItem('token')
+  //const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   return (   
     <>
