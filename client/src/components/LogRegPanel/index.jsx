@@ -7,7 +7,7 @@ const LogRegPanel = () => {
 	const login = true;
 	const register = false;
 
-   const [tab, setTab] = useState(login);
+    const [tab, setTab] = useState(login);
 	const handleTabLog = () => setTab(login);
 	const handleTabReg = () => setTab(register);
 

@@ -15,18 +15,17 @@ const App = (props) => {
   //TODO redux!
   //const token = localStorage.getItem('token')
   //const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  console.log('isLoggedIn app', isLoggedIn)
   return (   
     <>
         <Header />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginAndRegister />} />
             { isLoggedIn ? (
-               <Route path="/characters" element={<Characters />} />
+              <Route path="/" element={<Characters />} />
             ) : (
-              <Route path="/characters" element={<Navigate to="/" />} />
+              <Route path="/" element={<LoginAndRegister />} />
             )}
             <Route path="*" element={<NotFound />} />
           </Routes>

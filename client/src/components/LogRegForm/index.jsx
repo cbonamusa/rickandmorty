@@ -16,7 +16,7 @@ import * as services from '../../../services/user.service';
 const LogRegForm = ({form}) => {
   //TODO: Login redux
   const dispatch = useDispatch();
-  const [notification, setNotification] = useState({type: 'none', text: ''});
+  const [notification, setNotification] = useState({type: 'none', form:null, text: ''});
   const [userData, setUserData] = useState({
     username:'',
     email: '',
@@ -28,7 +28,7 @@ const LogRegForm = ({form}) => {
     try {
       const { error, accessToken } = await services.loginRequest(userData);
       if (error) {
-        setNotification({ type:'error', text: error.toString() });
+        setNotification({ type:'error', form:'login', text: error.toString() });
         dispatch(loginErrorAction(error));
 
       } else {
@@ -39,7 +39,7 @@ const LogRegForm = ({form}) => {
       }
 
     } catch(error) {
-      setNotification({ type:'error', text: error.toString() });
+      setNotification({ type:'error', form:'login', text: error.toString() });
     }
   }
 
@@ -48,13 +48,13 @@ const LogRegForm = ({form}) => {
     try {
       const json = await services.registerRequest(userData);
       if (json.error) {
-        setNotification({ type:'error', text:json.error.toString() })
+        setNotification({ type:'error', form:'register', text:json.error.toString() })
       } else {
         setNotification({ type:'ok', text: 'Success! Your user account is created' });
         setUserData({username:'', email:'', password: ''});
       }
     } catch(error) {
-      setNotification({ type:'error', text: error.toString() })
+      setNotification({ type:'error', form:'register', text: error.toString() })
 
     }
   }
@@ -66,23 +66,42 @@ const LogRegForm = ({form}) => {
   return (
     <div className={styles.formContent}>
      <form onSubmit={form === 'login' ? submitLogin : submitRegister }>
-        <label>
-          <p>Username</p>
-          <input type="text" value={userData.username} onChange={(e) => setUserData((prev) => ({...prev, username:e.target.value}))}/>
-        </label>
         { form === 'register' && (
             <label>
                 <p>Email</p>
-                <input type="text" value={userData.email} onChange={(e) => setUserData((prev) => ({...prev, email:e.target.value}))} />
+                <input 
+                  type="text" 
+                  value={userData.email} 
+                  onChange={(e) => setUserData((prev) => ({...prev, email:e.target.value}))} 
+                />
             </label>
         )}
         <label>
-          <p>Password</p>
-          <input type="text" value={userData.password} onChange={(e) => setUserData((prev) => ({...prev, password:e.target.value}))} />
+          <p>Username</p>
+          <input 
+            type="text" 
+            value={userData.username} 
+            onChange={(e) => setUserData((prev) => ({...prev, username:e.target.value}))}
+          />
         </label>
-        <div className={`${styles.notifications} ${notificationVariants}`}>
-          <p>{notification.text}</p>
-        </div>
+        <label>
+          <p>Password</p>
+          <input 
+            type="text" 
+            value={userData.password} 
+            onChange={(e) => setUserData((prev) => ({...prev, password:e.target.value}))} 
+          />
+        </label>
+        <label for="robot">
+          <input type="checkbox" id="robot" value='robot' />
+          I'm not a Robot
+        </label>
+  
+        {notification.form === form && (
+          <div className={`${styles.notifications} ${notificationVariants}`}>
+            <p>{notification.text}</p>
+          </div>
+         )}
         <input type="submit" value={form === 'login' ? 'Log In' : 'Register'} />
      </form>
     </div>

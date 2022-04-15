@@ -1,5 +1,5 @@
 import { useDispatch, useSelector} from 'react-redux';
-
+import {logoutAction} from '../../../store/reducers/users/users.actions';
 import styles from './Styles.module.scss';
 import logo from '/logo.png'
 
@@ -11,21 +11,19 @@ import logo from '/logo.png'
  */
 export const Header = () => {
     const dispatch = useDispatch();
-    //const token = localStorage.getItem('token')
-    //const [isLoggedIn, setIsLoggedIn] = useState(!!token);
     
     const handleLogout = () => {
         dispatch(logoutAction());
         localStorage.removeItem('token');
         sessionStorage.removeItem('token')
     }
-    const userLogged = useSelector((state) => state.isLoggedIn);
-  
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    
     return (
         <header className={styles.header}>
             <div className={styles.header_content}>
                 <img src={logo} width={200}/>
-                { userLogged && (
+                { isLoggedIn && (
                     <button className={styles.logoutCTA} onClick={handleLogout}>Logout</button>
                 )}
             </div>

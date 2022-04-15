@@ -7,6 +7,8 @@
     max-width: 800px;
     margin: 90px auto;
     border: solid 2px #65798f;
+    border-radius: 8px;
+    border-top: none;
 
     .tabs {
         display: flex;
@@ -21,7 +23,10 @@
             font-size: 17px;
             flex: 1;
             text-align: center;
-            border: solid 1px #65798f;
+            border: solid 2px #65798f;
+            border-top-left-radius: 6px;
+            border-left:none;
+            border-top-right-radius: 6px;
         }
         .tabUnactive {
             background-color:#1727397b;

@@ -9,7 +9,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: inherit;
-        label {
+        label:not([for="robot"]) {
             display: flex;
             flex-direction: row;
             justify-content:end;
@@ -33,6 +33,30 @@
             @include cta($seccondary);
             width: 100%;
         }
+        label[for="robot"] {
+            text-align: center;
+            color: $seccondary;
+            font-weight: medium;
+            display: inline-block;
+            margin-bottom: 20px;
+            input[type="checkbox" i] {
+                display: inline-block;
+                border-radius: 4px;
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+                vertical-align: middle;
+                border: 2px solid $seccondary;
+                background-color: white;
+                appearance: none;
+                cursor: pointer;
+
+                &:checked {
+                    background-color: $primary;
+                }
+            }
+        }
+
         .notifications {
             padding: 0px 20px;
             text-align: center;

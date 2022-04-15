@@ -1,14 +1,31 @@
-import React from 'react'
+import { useState } from 'react';
+import styles from './Styles.module.scss';
+
 
 const MainCharPanel = () => {
+	const characters = true;
+	const fav = false;
 
-  return (
-		<div className={styles.mainPanel}>
+   	const [tab, setTab] = useState(characters);
+	const handleTabCharacters = () => setTab(characters);
+	const handleTabFav = () => setTab(fav);
+
+	return (
+		<div className={styles.charPanel}>
+			<div className={styles.tabs}>
+				<button onClick={handleTabCharacters} className={(tab === characters) ? styles.tabActive : styles.tabUnactive}>
+					Rick & Morty Characters
+				</button>
+				<button onClick={handleTabFav} className={(tab === fav) ? styles.tabActive : styles.tabUnactive}>
+					My Favourites
+				</button>
+			</div>
+			<h1>{tab === characters ? 'Rick & Morty Characters!': 'Your Favourite Characters'}</h1>
 			<div className={styles.content}>
-				<h1>{contentData == 'characters' ? 'Rick & Morty Characters!': 'Your Favourites'}</h1>
+		
 			</div>						
 		</div>
-  )
+	)
 }
 
 export default MainCharPanel

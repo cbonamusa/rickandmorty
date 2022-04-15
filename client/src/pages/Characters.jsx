@@ -6,8 +6,7 @@ import MainCharPanel from "../components/MainCharPanel";
 
 const Characters = () => {
     const dispatch = useDispatch();
-    const {characters} = useSelector(state => state.characters);
-    console.log('DATAAAAA', characters);
+    //const {characters} = useSelector(state => state.characters);
 
     useEffect(() => {
         dispatch(loadCharacters());
