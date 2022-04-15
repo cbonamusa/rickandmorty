@@ -8,8 +8,7 @@ const App = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
-        {/* { !isLoggedIn ? (<LoginAndRegister />) : (<Characters />) } */}
-        <Characters />
+        { !isLoggedIn ? (<LoginAndRegister />) : (<Characters />) }
     </>
 
   )

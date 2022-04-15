@@ -1,5 +1,5 @@
 /**
- * Use env vars
+ * Config file for the use of env vars
  */
 const checkEnvVar = (name) => {
     if (name in process.env) {
@@ -16,5 +16,4 @@ module.exports = {
     PORT: checkEnvVar('PORT'),
     JWT_SECRET: checkEnvVar('JWT_SECRET'),
     JWT_EXPIRATION_TIME: checkEnvVar('JWT_EXPIRATION_TIME'),
-
 };

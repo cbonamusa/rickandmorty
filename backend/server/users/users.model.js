@@ -15,13 +15,19 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true
     },
     favourites: {
-        type: Object,
+        type: Array,
         required: false
     }
 });
 
+userSchema.index({ username: 1 });
 const User = mongoose.model('user', userSchema);
+//collection: users
+
 module.exports = User;
