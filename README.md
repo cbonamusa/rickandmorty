@@ -8,6 +8,7 @@ FRONTEND:
         vitejs
         react
         redux
+        react-router
         axios
 
 BACKEND: 

@@ -1,10 +1,9 @@
-import Header from "../components/Header"
 import LogRegPanel from "../components/LogRegPanel";
 
 const LoginAndRegister = () => {
   return (
     <>
-        <Header />
+        <h1>Please, Login or Register</h1>
         <LogRegPanel />
     </>
   )

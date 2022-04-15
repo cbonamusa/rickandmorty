@@ -9,10 +9,13 @@ import logo from '/logo.png'
  *  <Header /> 
  */
 export const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const token = localStorage.getItem('token')
+    const [isLoggedIn, setIsLoggedIn] = useState(!!token);
     const handleLogout = () => {
-        setIsLoggedIn(false);
+        localStorage.removeItem('token');
+        setIsLoggedIn(true)
     }
+
   return (
     <header className={styles.header}>
         <div className={styles.header_content}>

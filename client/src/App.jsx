@@ -1,14 +1,39 @@
-import { useState } from 'react'
-import LoginAndRegister from './pages/LoginAndRegister';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+
+import Header from "./components/Header";
 import Characters from './pages/Characters';
-import './styles/globalStyles.scss'
+import LoginAndRegister from './pages/LoginAndRegister';
+import NotFound from './pages/NotFound';
+import './styles/globalStyles.scss';
+
+
 
 
 const App = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  return (
+  //TODO redux!
+  const token = localStorage.getItem('token')
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+
+  const logIn = (token) => {
+    localStorage.setItem('token', token);
+    setIsLoggedIn(true)
+  }
+
+  return (   
     <>
-        { !isLoggedIn ? (<LoginAndRegister />) : (<Characters />) }
+        <Header />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginAndRegister />} />
+            { isLoggedIn ? (
+               <Route path="/characters" element={<Characters />} />
+            ) : (
+              <Route path="/characters" element={<Navigate to="/" />} />
+            )}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
     </>
 
   )

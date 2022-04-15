@@ -14,9 +14,8 @@ const Characters = () => {
     }, [dispatch])
     return (
         <div>
-            <Header />
+            <h1>Rick & Morty Characters</h1>
             <MainCharPanel />
-
         </div>
     )
 }
