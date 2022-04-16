@@ -14,7 +14,6 @@ import * as services from '../../../services/user.service';
  *  <LogRegForm form='login' /> 
  */
 const LogRegForm = ({form}) => {
-  //TODO: Login redux
   const dispatch = useDispatch();
   const [notification, setNotification] = useState({type: 'none', form:null, text: ''});
   const [userData, setUserData] = useState({

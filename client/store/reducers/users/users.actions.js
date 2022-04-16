@@ -28,3 +28,12 @@ export const logoutAction = () => ({
     type: actionTypes.LOGOUT
 });
 
+
+/*
+ * Add to favourites
+ */
+export const addToFavourites = (favourite) => ({
+    type: actionTypes.ADD_TO_FAVOURITES,
+    payload: favourite
+});
+

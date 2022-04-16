@@ -19,6 +19,9 @@ const usersReducer = (state = initialState, {type, payload}) => {
         case actionTypes.LOGOUT:
             return {...state, error: payload, isLoggedIn: false,  token:"", isAuthenticated: false};
 
+        case actionTypes.ADD_TO_FAVOURITES:
+            return {...state, favourites: payload}
+
         default:
             return state;
     }

@@ -1,27 +1,44 @@
 import { useState } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import Card from '../Card';
 import styles from './Styles.module.scss';
 
 
 const MainCharPanel = () => {
-	const characters = true;
-	const fav = false;
+	const showCharacters = true;
+	const showFavourites = false;
+   	const [tab, setTab] = useState(showCharacters)
+	const { characters }= useSelector((state) => state.characters);
 
-   	const [tab, setTab] = useState(characters);
-	const handleTabCharacters = () => setTab(characters);
-	const handleTabFav = () => setTab(fav);
+
+	const handleTabCharacters = () => setTab(showCharacters);
+	const handleTabFav = () => setTab(showFavourites);
 
 	return (
 		<div className={styles.charPanel}>
 			<div className={styles.tabs}>
-				<button onClick={handleTabCharacters} className={(tab === characters) ? styles.tabActive : styles.tabUnactive}>
+				<button onClick={handleTabCharacters} className={(tab === showCharacters) ? styles.tabActive : styles.tabUnactive}>
 					Rick & Morty Characters
 				</button>
-				<button onClick={handleTabFav} className={(tab === fav) ? styles.tabActive : styles.tabUnactive}>
+				<button onClick={handleTabFav} className={(tab === showFavourites) ? styles.tabActive : styles.tabUnactive}>
 					My Favourites
 				</button>
 			</div>
 			<div className={styles.content}>
-		
+			{ tab === showCharacters &&  characters != null && (
+				<div className={styles.showCharactersContainer}>
+					{characters.map(character => (
+						<Card key={character.id}
+							  id={character.id}
+							  img={character.image}
+							  name={character.name}
+							  location={character.location.name}
+							  gender={character.gender}
+							  species={character.species}
+						/>
+					))}
+				</div>
+			)}		
 			</div>						
 		</div>
 	)

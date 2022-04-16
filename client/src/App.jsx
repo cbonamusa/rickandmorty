@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import {loginKeepSession} from '../store/reducers/users/users.actions'
+import { loginKeepSession } from '../store/reducers/users/users.actions'
 
 import Header from "./components/Header";
 import Characters from './pages/Characters';
@@ -13,15 +12,12 @@ import './styles/globalStyles.scss';
 
 
 const App = (props) => {
-  //TODO redux!
-
-  //const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
   if (token) {
     dispatch(loginKeepSession());
   }
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   return (   
     <>

@@ -1,0 +1,96 @@
+@import "../../styles/utils.scss";
+
+.card {
+    background-color:#001739;
+    border-radius: $medianil;
+    padding: $medianil/2;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-bottom: $medianil;
+    width: 300px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    cursor:initial;
+    img {
+        height: auto;
+        border-radius: $medianil/2;
+    }
+    &:hover, .contentCard:hover {
+        transform: translateY(0);
+    }
+    .contentCard {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;      
+        background-color: #001739;      
+        transform: translateY(100%);
+        transition: .2s ease-in-out;
+        h4 {
+            color: white;
+            font-family: $seccondary-font;
+            letter-spacing: 1px;
+        }
+        &_visible {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: $medianil/2 $medianil;
+            border-radius: 30px 30px 0 0 ;    
+            background-color: #001739;
+            transform: translateY(-100%);
+            transition: .2s ease-in-out;
+            button {
+                border: none;
+                background: none;
+                cursor: pointer;
+            }
+            .favIcon { 
+                position: relative;
+                width: 12px;
+                height: 12px;
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                transform: rotate(45deg);
+                background-color: #9ae8f0;
+                margin-top: -19px;
+                margin-left: 6px;
+                z-index: -1;
+                &:before, &:after {
+                    position: absolute;
+                    width: 13px;
+                    height: 13px;
+                    content: '';
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    -o-border-radius: 50%;
+                    border-radius: 50%;
+                    background-color: #9ae8f0;
+                }
+                &:before {
+                    bottom: 0px;
+                    left: -9px;
+                }
+                &:after {
+                    top: -9px;
+                    right: 0px;
+                }
+            }
+        }
+        &_info {
+            margin-top: -90px;
+            padding: $medianil;
+            p {
+                color: white;
+                font-family: $main-font;
+                margin: $medianil/2 0;
+                font-size: 14px;
+            }
+        }
+    }
+
+}
