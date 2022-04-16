@@ -27,7 +27,6 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.index({ username: 1 });
-const User = mongoose.model('user', userSchema);
-//collection: users
+const User = mongoose.model('user', userSchema); //collection name -> users
 
 module.exports = User;

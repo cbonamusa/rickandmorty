@@ -7,9 +7,12 @@ export const loginRequestAction = () => ({
     type: actionTypes.LOGIN_REQUEST
 });
 
-export const loginSuccessAction = (token) => ({
+export const loginSuccessAction = (token, username) => ({
     type: actionTypes.LOGGED_IN_SUCCESS,
-    payload: token
+    payload: {
+        token,
+        username
+    }
 });
 
 export const loginErrorAction = (error) => ({
@@ -17,8 +20,9 @@ export const loginErrorAction = (error) => ({
     payload: error
 })
 
-export const loginKeepSession = () => ({
+export const loginKeepSession = (username) => ({
     type: actionTypes.LOGIN_KEEPSESSION,
+    payload: username
 })
 
 /*
@@ -32,8 +36,13 @@ export const logoutAction = () => ({
 /*
  * Add to favourites
  */
-export const addToFavourites = (favourite) => ({
+export const addToFavouritesAction = (favourite) => ({
     type: actionTypes.ADD_TO_FAVOURITES,
+    payload: favourite
+});
+
+export const removeFromFavouritesAction = (favourite) => ({
+    type: actionTypes.REMOVE_FAVOURITE,
     payload: favourite
 });
 

@@ -1,6 +1,6 @@
 const loginUrl = 'http://localhost:5000/login'
 const registerUrl = 'http://localhost:5000/register'
-const favouriteUrl = 'http://localhost:5000/users/favourites'
+const favouriteUrl = 'http://localhost:5000/user/favourites'
 
 
 
@@ -24,12 +24,12 @@ export const loginRequest = async ({username, password}) => {
       return token;
 }
 
-export const addFavourites = async ({id}) => {
+export const addFavouritesService = async ({username, favourites}) => {
   const resp = await fetch(favouriteUrl, {
     method:'POST',
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({id})
+    body: JSON.stringify({username, favourites})
   });
-  const favourites = await resp.json();
-  return favourites;
+  const result = await resp.json();
+  return result;
 }

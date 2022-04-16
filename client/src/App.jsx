@@ -7,6 +7,7 @@ import Characters from './pages/Characters';
 import LoginAndRegister from './pages/LoginAndRegister';
 import NotFound from './pages/NotFound';
 import './styles/globalStyles.scss';
+import { useEffect } from "react";
 
 
 
@@ -14,9 +15,12 @@ import './styles/globalStyles.scss';
 const App = (props) => {
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
-  if (token) {
-    dispatch(loginKeepSession());
-  }
+//getState username and pass it to keepsession
+  useEffect(() => {
+    if (token) {
+      dispatch(loginKeepSession());
+    }
+  }, [])
   const { isLoggedIn } = useSelector((state) => state.user);
 
   return (   

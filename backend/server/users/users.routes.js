@@ -68,10 +68,23 @@ const login = async (req, resp, next) => {
     }
 }
 
+const favourites = async (req, resp, next) => {
+    try {
+        const { username } = req.body;
+        const user = await User.findOne({ username }).select('+favourites').lean().exec();
+       // const resFavourites = user.favourites;
+        console.log(username)
+        resp.status(200).send(resFavourites);
+    } catch(error) {
+        next(error)
+    }
+}
+
 
 const addRoutes = (app) => {
     app.post('/register', register);
-    app.post('/login', login)
+    app.post('/login', login);
+    app.post('/user/favourites', favourites);
 }
 
 module.exports = {
