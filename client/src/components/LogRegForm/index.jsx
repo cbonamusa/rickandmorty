@@ -92,7 +92,7 @@ const LogRegForm = ({form}) => {
             onChange={(e) => setUserData((prev) => ({...prev, password:e.target.value}))} 
           />
         </label>
-        <label for="robot">
+        <label htmlFor="robot">
           <input type="checkbox" id="robot" value='robot' />
           I'm not a Robot
         </label>

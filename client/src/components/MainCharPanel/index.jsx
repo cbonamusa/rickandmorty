@@ -20,7 +20,6 @@ const MainCharPanel = () => {
 					My Favourites
 				</button>
 			</div>
-			<h1>{tab === characters ? 'Rick & Morty Characters!': 'Your Favourite Characters'}</h1>
 			<div className={styles.content}>
 		
 			</div>						

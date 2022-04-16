@@ -13,6 +13,9 @@ const usersReducer = (state = initialState, {type, payload}) => {
         case actionTypes.LOGIN_FAILED:
             return {...state, error: payload };
         
+        case actionTypes.LOGIN_KEEPSESSION:
+            return {...state, isLoggedIn: true, isAuthenticated: true };
+        
         case actionTypes.LOGOUT:
             return {...state, error: payload, isLoggedIn: false,  token:"", isAuthenticated: false};
 

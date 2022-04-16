@@ -17,6 +17,10 @@ export const loginErrorAction = (error) => ({
     payload: error
 })
 
+export const loginKeepSession = () => ({
+    type: actionTypes.LOGIN_KEEPSESSION,
+})
+
 /*
  * LogOut
  */
