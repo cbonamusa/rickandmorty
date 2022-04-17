@@ -103,6 +103,7 @@ const getFavourites = async (req, resp, next) => {
         next(error)
     }
 }
+
 const addRoutes = (app) => {
     app.post('/register', register);
     app.post('/login', login);

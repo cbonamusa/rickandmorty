@@ -20,41 +20,37 @@ app.use(express.json()); //Middleware to get body's parsed as json
 app.use(express.static('../../client/dist'));
 
 
-/*
- * Routes 
- */
+/* Routes */
 app.get('/api', async (req, res) => {
     res.status(200).send('RickAndMorty API');
 });
 
-/* Characters from external API - Rick and morty */
-app.get('/api/characters', (req, res) => {
+/* Characters from R&M API */
+app.get('/api/characters', (req, resp) => {
     const url = 'https://rickandmortyapi.com/api/character';
     fetch(url)
-    .then(res => res.json())
-    .then(data => res.send({data}))
-    .catch(err => res.send(err))
+    .then(resp => resp.json())
+    .then(data => resp.send({data}))
+    .catch(err => resp.send(err))
 });
 
-// app.get('/api/characters/:id', (req, res) => {
-//     const { id } = req.body;
-//     const url = `https://rickandmortyapi.com/api/character/${id}`;
-//     fetch(url)
-//     .then(res => res.json())
-//     .then(data => res.send({data}))
-//     .catch(err => res.send(err))
-// });
+/* Fav characters from R&M API by id */
+app.post('/api/user/favourites', (req, resp) => {
+    const { id } = req.body;
+    const url = `https://rickandmortyapi.com/api/character/${id}`;
+    fetch(url)
+    .then(resp => resp.json())
+    .then(data => resp.send({data}))
+    .catch(err => resp.send(err))
+});
 
 /* Users routes - register login  */
 require('./users/users.routes').addRoutes(app);
 
 
-
 app.use(errorHandler);
 
-/*
- * Start the server after connecting to the db
- */
+/* Start the server after connecting to the db */
 const serverStart = async () => {
     await db.connect();
     app.listen(config.PORT, () => {
