@@ -34,7 +34,6 @@ const LogRegForm = ({form}) => {
         setNotification({ type:'ok', text: 'Success' });
         localStorage.setItem('token', accessToken);
         localStorage.setItem('username', userData.username);
-        // sessionStorage.setItem('token', accessToken);
         dispatch(loginSuccessAction(accessToken, userData.username));
       }
 

@@ -97,7 +97,6 @@ const getFavourites = async (req, resp, next) => {
     try {
         const { username } = req.body;
         const favouritesFromUser = await User.find({ username }).select('+favourites').lean().exec();
-        console.log(favouritesFromUser);
         resp.status(200).send(favouritesFromUser);
     } catch(error) {
         next(error)

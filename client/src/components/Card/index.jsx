@@ -20,6 +20,7 @@ const Card = ({
     const dispatch= useDispatch();
     const user = useSelector((state) => state.user);
     const notInitialRender = useRef(false);
+    //const { favourites } = useSelector((state) => state.user );
 
 
     const handleFavourites = (e) => {
@@ -32,7 +33,7 @@ const Card = ({
         
     const addFavourites = async (characterId) => {
         try {
-            userServices.addFavouritesService(characterId, user.username);
+           await userServices.addFavouritesService(characterId, user.username);
         } catch(error) {
             console.log(error)
         }  
@@ -40,28 +41,33 @@ const Card = ({
 
     const removeFavourites = async (characterId) => {
         try {
-            userServices.removeFromFavourites(characterId, user.username);
+         await userServices.removeFromFavourites(characterId, user.username);
         } catch(error) {
-            console.log(error)
+            console.log(error);
         }  
     };
 
-    const getFavourites = async () => {
+    const getAndSaveFavourites = async () => {
         const favs = await userServices.favouritesFromServer(user.username);
-        dispatch(updateFavouritesAction( favs[0].favourites ))
+        dispatch(updateFavouritesAction( favs[0].favourites ));
+
+        favs[0].favourites?.map(fav => {
+            if (fav == id) {
+                setIsFav((prev) => ({...prev, fav:true}))
+            } 
+        });
     };
 
  
     useEffect(() => {
-        getFavourites();
         if (notInitialRender.current) {
-            if (isFav.fav) {
-                addFavourites(isFav.favouriteId); 
-            } else {
-                removeFavourites(isFav.favouriteId); 
-            }
+            isFav.fav ? ( addFavourites(isFav.favouriteId) ) : ( removeFavourites(isFav.favouriteId));
+        } else {
+            getAndSaveFavourites();
         }
         notInitialRender.current = false;
+
+
     }, [isFav.fav]);
 
     //PENDING TODO: Get the already favourites and change it's state from initial state (false) to true!!!
@@ -74,7 +80,7 @@ const Card = ({
                     <button type="button" onClick={handleFavourites}>
                         <div>
                             <img src={favIcon} id={id} width={25} />
-                            { (isFav.fav) && (<div className={styles.favIcon}></div>)}
+                            { isFav.fav && (<div className={styles.favIcon}></div>)}
                         </div>
                     </button>
                 </div>

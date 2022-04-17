@@ -4,8 +4,8 @@ import LogRegForm from '../LogRegForm';
 
 
 const LogRegPanel = () => {
-	const login = true;
-	const register = false;
+	const login = 1;
+	const register = 0;
 
     const [tab, setTab] = useState(login);
 	const handleTabLog = () => setTab(login);
@@ -24,8 +24,8 @@ const LogRegPanel = () => {
 			<div className={styles.content}>
 				{ 
 					{
-						'true': <LogRegForm form='login' />,
-						'false': <LogRegForm form='register' />
+						'1': <LogRegForm form='login' />,
+						'0': <LogRegForm form='register' />
 					}[tab]
 				}
 			</div>						

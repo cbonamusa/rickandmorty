@@ -34,7 +34,7 @@ export const removeFromFavourites = async (favourites, username) => {
   const resp = await fetch(`${url}/user/removefavourites`, {
     method:'POST',
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({favourites, username })
+    body: JSON.stringify({ favourites, username })
   });
   const result = await resp.json();
   return result;

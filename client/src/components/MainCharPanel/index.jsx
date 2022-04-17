@@ -1,45 +1,49 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import Card from '../Card';
 import styles from './Styles.module.scss';
 import * as charServices from '../../../services/characters.service';
+import * as userServices from '../../../services/user.service';
+
+
 
 const MainCharPanel = () => {
-	const showCharacters = true;
-	const showFavourites = false;
+	const showCharacters = 0;
+	const showFavourites = 1;
 
    	const [tab, setTab] = useState(showCharacters);
 	const [favData, setFavData] = useState([])
 
 	const { characters }= useSelector((state) => state.characters);
 	const { favourites } = useSelector((state) => state.user );
+	const user = useSelector((state) => state.user);
+
+
 
 	const handleTabCharacters = () => setTab(showCharacters);
-	const handleTabFav = () => setTab(showFavourites);
+	const handleTabFav = () =>  setTab(showFavourites);
 	
-	//TODO: REMOVE WHEN CARDS FAVS IS FIXED
-	const favs = [...new Set(favourites)];
-	const getFavFromBe = () => {
-		favs?.map(id => {
+	const getFavFromAPI = async () => {
+		const favs = await userServices.favouritesFromServer(user.username);
+		favs[0].favourites?.map(id => {
 			charServices.getFavCharacter(id)
 			.then(resp => resp.data )
 			.then(result => {
 				const alreadyExist = favData.some(fav => {
 					if (fav.id === result.id) {
 						return true;
-					}
+					} 
 				})
-				if (!alreadyExist) {
+				if (!alreadyExist && tab === showFavourites) {
 					setFavData((prev) => ([...prev, result]));
 				}
 			})
 			.catch(error => console.log(error))
-		})
+		});
 	}
 
-
 	useEffect(() => {
-		getFavFromBe();
+		getFavFromAPI();
 	}, [tab])
 
 
@@ -69,21 +73,24 @@ const MainCharPanel = () => {
 					</div>
 				)}	
 				{ tab === showFavourites && (
-					(favData.length <= 0 && favData == undefined) ? (
+					(favData.length == 0) ? (
 						<h3>You don't have any Favourite characters yet!</h3>
 					) : (
-						<div className={styles.showCharactersContainer}>
-							{favData?.map(character => (
-								<Card key={`fav-${character.id}`}
-									id={character.id}
-									img={character.image}
-									name={character.name}
-									location={character.location.name}
-									gender={character.gender}
-									species={character.species}
-								/>
-							))}
-						</div>
+						<>
+							{/* <button type="button" onClick={handleRefresh}><img src="/refreshIcon.png" width={25} /></button> */}
+							<div className={styles.showCharactersContainer}>
+								{favData?.map(character => (
+									<Card key={`fav-${character.id}`}
+										id={character.id}
+										img={character.image}
+										name={character.name}
+										location={character.location.name}
+										gender={character.gender}
+										species={character.species}
+									/>
+								))}
+							</div>
+						</>
 					)
 				)}	
 			</div>						
