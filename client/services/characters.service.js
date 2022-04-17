@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:5000/api/characters'
+const url = 'http://localhost:5000'
 
-const getCharacters = async () => {
-    const res = await axios.get(baseUrl)
+export const getCharacters = async () => {
+    const res = await axios.get(`${url}/api/characters`)
     return res.data
 }
-
-export default getCharacters

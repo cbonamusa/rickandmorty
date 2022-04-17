@@ -20,10 +20,10 @@ const userSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
-    favourites: {
+    favourites: [{
         type: Array,
         required: false
-    }
+    }]
 });
 
 userSchema.index({ username: 1 });

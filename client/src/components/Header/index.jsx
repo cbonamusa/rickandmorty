@@ -15,7 +15,7 @@ export const Header = () => {
     const handleLogout = () => {
         dispatch(logoutAction());
         localStorage.removeItem('token');
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('username');
     }
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     

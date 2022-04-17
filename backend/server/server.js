@@ -36,6 +36,15 @@ app.get('/api/characters', (req, res) => {
     .catch(err => res.send(err))
 });
 
+// app.get('/api/characters/:id', (req, res) => {
+//     const { id } = req.body;
+//     const url = `https://rickandmortyapi.com/api/character/${id}`;
+//     fetch(url)
+//     .then(res => res.json())
+//     .then(data => res.send({data}))
+//     .catch(err => res.send(err))
+// });
+
 /* Users routes - register login  */
 require('./users/users.routes').addRoutes(app);
 

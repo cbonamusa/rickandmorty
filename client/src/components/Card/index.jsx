@@ -1,11 +1,12 @@
 import styles from './Styles.module.scss';
 import favIcon from '/favourite.svg';
-import * as services from '../../../services/user.service';
-import { useState } from 'react';
-import { addToFavouritesAction } from "../../../store/reducers/users/users.actions";
+import * as userServices from '../../../services/user.service';
 
-import { useEffect } from 'react';
+import { updateFavouritesAction } from "../../../store/reducers/users/users.actions";
+
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
+
 
 const Card = ({
     img,
@@ -15,50 +16,65 @@ const Card = ({
     gender,
     species
 }) => {
-    const [isFav, setIsFav] = useState({favouriteId:'', fav:false});
+    const [isFav, setIsFav] = useState({favouriteId:'', fav:false });
     const dispatch= useDispatch();
-    //getState() username and pass it to addFavouritesService
-     //const  username  = useSelector((state) => state.user.username); //get the username and pass it to backend
-    
-    const handleAddToFavourites = (e) => {
+    const user = useSelector((state) => state.user);
+    const notInitialRender = useRef(false);
+
+
+    const handleFavourites = (e) => {
         e.preventDefault();
-        console.log('username', username)
         const characterId = e.target.id;
-        setIsFav((prev) => ({...prev, favouriteId: characterId, fav:!isFav.fav}))
-        addFavourites(characterId) 
+        setIsFav((prev) => ({...prev, favouriteId:characterId, fav:!prev.fav }));
+        notInitialRender.current = true;
     };
 
-    const addFavourites = async (characterId) => {
         
+    const addFavourites = async (characterId) => {
         try {
-            if(isFav.favouriteId === false) {
-                //REMOVE FROM FAVOURITES
-                //dispatch(removeFromFavourites(isFav.id))
-            console.log('REMOOOVE')
-
-            } else {
-                //ADD TO FAVOURITES
-            console.log('ADDD')
-                const results = await services.addFavouritesService(characterId, ????);
-                console.log(results)
-                //dispatch(addToFavouritesAction(results));
-            }
+            userServices.addFavouritesService(characterId, user.username);
         } catch(error) {
             console.log(error)
-            // dispatch(addToFavouritesError(error))
         }  
-    }
+    };
 
+    const removeFavourites = async (characterId) => {
+        try {
+            userServices.removeFromFavourites(characterId, user.username);
+        } catch(error) {
+            console.log(error)
+        }  
+    };
+
+    const getFavourites = async () => {
+        const favs = await userServices.favouritesFromServer(user.username);
+        dispatch(updateFavouritesAction( favs[0].favourites ))
+    };
+
+ 
+    useEffect(() => {
+        getFavourites();
+        if (notInitialRender.current) {
+            if (isFav.fav) {
+                addFavourites(isFav.favouriteId); 
+            } else {
+                removeFavourites(isFav.favouriteId); 
+            }
+        }
+        notInitialRender.current = false;
+    }, [isFav.fav]);
+
+    //PENDING TODO: Get the already favourites and change it's state from initial state (false) to true!!!
     return (
         <div className={styles.card} key={id} >
             <img src={img} />
             <div className={styles.contentCard}>
                 <div className={styles.contentCard_visible}>
                     <h4>{name}</h4>
-                    <button type="button" onClick={handleAddToFavourites}>
+                    <button type="button" onClick={handleFavourites}>
                         <div>
                             <img src={favIcon} id={id} width={25} />
-                            {isFav.fav && (<div className={styles.favIcon}></div>)}
+                            { (isFav.fav) && (<div className={styles.favIcon}></div>)}
                         </div>
                     </button>
                 </div>

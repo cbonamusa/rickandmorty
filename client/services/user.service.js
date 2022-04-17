@@ -1,11 +1,7 @@
-const loginUrl = 'http://localhost:5000/login'
-const registerUrl = 'http://localhost:5000/register'
-const favouriteUrl = 'http://localhost:5000/user/favourites'
-
-
+const url = 'http://localhost:5000'
 
 export const registerRequest = async ({email, password, username}) => {
-    const resp = await fetch(registerUrl, {
+    const resp = await fetch(`${url}/register`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({email, password, username})
@@ -15,7 +11,7 @@ export const registerRequest = async ({email, password, username}) => {
 }
 
 export const loginRequest = async ({username, password}) => {
-    const resp = await fetch(loginUrl, {
+    const resp = await fetch(`${url}/login`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({username, password})
@@ -24,12 +20,32 @@ export const loginRequest = async ({username, password}) => {
       return token;
 }
 
-export const addFavouritesService = async ({username, favourites}) => {
-  const resp = await fetch(favouriteUrl, {
+export const addFavouritesService = async (favourites, username) => {
+  const resp = await fetch(`${url}/user/addfavourites`, {
     method:'POST',
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({username, favourites})
+    body: JSON.stringify({favourites, username })
   });
   const result = await resp.json();
   return result;
 }
+
+export const removeFromFavourites = async (favourites, username) => {
+  const resp = await fetch(`${url}/user/removefavourites`, {
+    method:'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({favourites, username })
+  });
+  const result = await resp.json();
+  return result;
+}
+
+export const favouritesFromServer = async (username) => {
+  const resp = await fetch(`${url}/user/favourites`, {
+    method:'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username })
+  });
+  const result = await resp.json();
+  return result;
+} 

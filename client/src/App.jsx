@@ -14,21 +14,22 @@ import { useEffect } from "react";
 
 const App = (props) => {
   const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
   const dispatch = useDispatch();
-//getState username and pass it to keepsession
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
     if (token) {
-      dispatch(loginKeepSession());
+      dispatch(loginKeepSession(token, username));
     }
-  }, [])
-  const { isLoggedIn } = useSelector((state) => state.user);
+  }, []);
 
   return (   
     <>
         <Header />
         <BrowserRouter>
           <Routes>
-            { isLoggedIn ? (
+            { user.isLoggedIn ? (
               <Route path="/" element={<Characters />} />
             ) : (
               <Route path="/" element={<LoginAndRegister />} />

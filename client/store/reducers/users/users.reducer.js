@@ -14,17 +14,14 @@ const usersReducer = (state = initialState, {type, payload}) => {
             return {...state, error: payload };
         
         case actionTypes.LOGIN_KEEPSESSION:
-            return {...state, isLoggedIn: true, isAuthenticated: true , username: payload};
+            return {...state, isLoggedIn: true, isAuthenticated: true ,token: payload.token, username: payload.username };
         
         case actionTypes.LOGOUT:
             return {...state, error: payload, isLoggedIn: false,  token:"", isAuthenticated: false};
 
-        case actionTypes.ADD_TO_FAVOURITES:
+        case actionTypes.UPDATE_FAVOURITES:
             return {...state, favourites: payload }
         
-        case actionTypes.REMOVE_FAVOURITE:
-            return {...state, favourites: payload }
-
         default:
             return state;
     }

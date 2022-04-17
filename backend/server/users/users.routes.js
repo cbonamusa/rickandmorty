@@ -3,7 +3,6 @@ const { Errors } = require('../common/errors');
 const User = require('./users.model');
 const auth = require('./auth');
 
-
 const register = async (req, resp, next) => {
     try {
         const { email, password, username } = req.body;
@@ -68,23 +67,48 @@ const login = async (req, resp, next) => {
     }
 }
 
-const favourites = async (req, resp, next) => {
+const addFavourites = async (req, resp, next) => {
     try {
-        const { username } = req.body;
-        const user = await User.findOne({ username }).select('+favourites').lean().exec();
-       // const resFavourites = user.favourites;
-        console.log(username)
-        resp.status(200).send(resFavourites);
+         const userUpdateFavourites = await User.findOneAndUpdate(
+            {username: req.body.username},
+            {$push: { favourites: req.body.favourites }}
+        );
+        resp.status(200).send(userUpdateFavourites);
+
     } catch(error) {
         next(error)
     }
 }
 
+const removeFavourites = async (req, resp, next) => {
+    try {
+         const userUpdateFavourites = await User.findOneAndUpdate(
+            {username: req.body.username},
+            {$pull: { favourites: req.body.favourites }}
+        );
+        resp.status(200).send(userUpdateFavourites);
 
+    } catch(error) {
+        next(error)
+    }
+}
+
+const getFavourites = async (req, resp, next) => {
+    try {
+        const { username } = req.body;
+        const favouritesFromUser = await User.find({ username }).select('+favourites').lean().exec();
+        console.log(favouritesFromUser);
+        resp.status(200).send(favouritesFromUser);
+    } catch(error) {
+        next(error)
+    }
+}
 const addRoutes = (app) => {
     app.post('/register', register);
     app.post('/login', login);
-    app.post('/user/favourites', favourites);
+    app.post('/user/addfavourites', addFavourites);
+    app.post('/user/removefavourites', removeFavourites);
+    app.post('/user/favourites', getFavourites);
 }
 
 module.exports = {
