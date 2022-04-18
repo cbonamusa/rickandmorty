@@ -46,9 +46,11 @@ The React application will run on port `3000` and the server port `5000`.
 
 ## Steps:
 
-1r. Register
-2n. Log in
-3r. Navigate throw Characters
+1. Register
+
+2. Log in
+
+3. Navigate throw Characters
 
 ## What I use: 
 
