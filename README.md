@@ -44,6 +44,12 @@ Attention: **Vitejs don't support node version 12! Make sure your node version i
    ```
 The React application will run on port `3000` and the server port `5000`.
 
+## Steps:
+
+1r. Register
+2n. Log in
+3r. Navigate throw Characters
+
 ## What I use: 
 
 1. Frontend
