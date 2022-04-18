@@ -13,7 +13,7 @@ Uses Express for the server and Mongo for the database.
    git clone https://github.com/cbonamusa/rickandmorty.git
    ```
 
-   /backend
+   /backend/users_bd  Notes: *You will need Docker running*
    ```bash
    docker-compose up -d
    ```
@@ -32,14 +32,14 @@ Uses Express for the server and Mongo for the database.
    
    /backend/server
    ```bash
-      npm run dev
+   npm run dev
    ```
 
 3. Start the frontend
    
    /client
    ```bash
-    npm run dev
+   npm run dev
    ```
 The React application will run on port `3000` and the server port `5000`.
 
