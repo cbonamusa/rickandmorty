@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { loginKeepSession } from '../store/reducers/users/users.actions'
 
@@ -7,7 +8,7 @@ import Characters from './pages/Characters';
 import LoginAndRegister from './pages/LoginAndRegister';
 import NotFound from './pages/NotFound';
 import './styles/globalStyles.scss';
-import { useEffect } from "react";
+
 
 
 

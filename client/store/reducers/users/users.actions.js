@@ -1,47 +1,43 @@
 import actionTypes from "./users.actionTypes";
 
-/*
- * LogIn
+/** 
+ * Log In
  */
-export const loginRequestAction = () => ({
-    type: actionTypes.LOGIN_REQUEST
-});
-
 export const loginSuccessAction = (token, username) => ({
-    type: actionTypes.LOGGED_IN_SUCCESS,
-    payload: {
-        token,
-        username
+   type: actionTypes.LOGGED_IN_SUCCESS,
+   payload: {
+      token,
+      username
     }
 });
 
 export const loginErrorAction = (error) => ({
-    type: actionTypes.LOGIN_FAILED,
-    payload: error
+   type: actionTypes.LOGIN_FAILED,
+   payload: error
 })
 
 export const loginKeepSession = (token, username) => ({
-    type: actionTypes.LOGIN_KEEPSESSION,
-    payload:  {
-        token,
-        username
-    }
+   type: actionTypes.LOGIN_KEEPSESSION,
+   payload:  {
+      token,
+      username
+   }
 })
 
 /*
- * LogOut
+ * Log Out
  */
 export const logoutAction = () => ({
-    type: actionTypes.LOGOUT
+   type: actionTypes.LOGOUT
 });
 
 
 /*
- * Add to favourites
+ * Update favourites
  */
 export const updateFavouritesAction = (favourite) => ({
-    type: actionTypes.UPDATE_FAVOURITES,
-    payload: favourite
+   type: actionTypes.UPDATE_FAVOURITES,
+   payload: favourite
 });
 
 

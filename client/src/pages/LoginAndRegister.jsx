@@ -1,5 +1,11 @@
 import LogRegPanel from "../components/LogRegPanel";
 
+/**
+ * Component Page LoginAndRegister
+ * @component
+ * @example
+ *  <LoginAndRegister /> 
+ */
 const LoginAndRegister = () => {
   return (
     <>

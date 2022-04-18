@@ -1,5 +1,5 @@
 export default {
-    characters: null,
-    loading: false,
-    error: null
+   characters: null,
+   loading: false,
+   error: null
 }

@@ -1,6 +1,13 @@
 import { white } from 'color-name'
 import React from 'react'
 
+
+/**
+ * Component Page NotFound
+ * @component
+ * @example
+ *  <NotFound /> 
+ */
 const NotFound = () => {
   return (
     <div style={notFoundStyles}>

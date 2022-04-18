@@ -10,8 +10,8 @@ const enhancers = storeEnhancers(applyMiddleware(thunk));
 
 
 export const store = createStore(
-    appReducers(),  
-    composeWithDevTools(enhancers)
+   appReducers(),  
+   composeWithDevTools(enhancers)
 );
 
 

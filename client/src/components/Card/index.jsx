@@ -7,7 +7,18 @@ import { updateFavouritesAction } from "../../../store/reducers/users/users.acti
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 
-
+/**
+ * Component Card
+ * @component
+ * @param {string} img Character's image
+ * @param {string} id Character's id
+ * @param {string} name Character's name
+ * @param {string} location Character's location
+ * @param {string} gender Character's gender
+ * @param {string} species Character's specie
+ * @example
+ *  <Card img="/path" id="1" name="Rick" location="Barcelona" gender="Male" species="Human" /> 
+ */
 const Card = ({
     img,
     id,
@@ -21,6 +32,11 @@ const Card = ({
     const user = useSelector((state) => state.user);
     const notInitialRender = useRef(false);
 
+    /**
+     * Handles click on favourite button and changes the state
+	 * @async
+	 * @fires setFav
+     */
     const handleFavourites = (e) => {
         e.preventDefault();
         const characterId = e.target.id;
@@ -28,7 +44,12 @@ const Card = ({
         notInitialRender.current = true;
     };
 
-        
+    /**
+     * When character is clicked and changed to favourite:
+	 * @throws addFavouritesService 
+     * @throws updateFavs 
+     * @async
+     */   
     const addFavourites = async (characterId) => {
         try {
             await userServices.addFavouritesService(characterId, user.username);
@@ -39,6 +60,13 @@ const Card = ({
         }  
     };
 
+
+    /**
+     * When character is clicked and changed to not favourite:
+	 * @throws removeFromFavourites 
+     * @throws updateFavs 
+     * @async
+     */   
     const removeFavourites = async (characterId) => {
         try {
             await userServices.removeFromFavourites(characterId, user.username);
@@ -49,6 +77,12 @@ const Card = ({
         }  
     };
 
+    /**
+     * Gets the favourites from server and keeps it as favs on it's state
+	 * @throws favouritesFromServer 
+     * @fires setFav
+     * @async
+     */   
     const getAndSaveFavourites = async () => {
         const favs = await userServices.favouritesFromServer(user.username);
         favs[0].favourites?.map(fav => {
@@ -58,6 +92,12 @@ const Card = ({
         });
     };
 
+    /**
+     * Updates the favourites from server to redux store
+	 * @throws favouritesFromServer 
+     * @fires updateFavouritesAction
+     * @async
+     */ 
     const updateFavs = async () => {
         const favs = await userServices.favouritesFromServer(user.username);
         dispatch(updateFavouritesAction( favs[0].favourites ));
@@ -70,7 +110,6 @@ const Card = ({
         } else {
             getAndSaveFavourites();
         }
-     
         notInitialRender.current = false;
     }, [isFav.fav]);
 

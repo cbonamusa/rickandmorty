@@ -1,7 +1,7 @@
 export default {
-    isLoggedIn: false,
-    token: "",
-    isAuthenticated: false,
-    favourites: [],
-    username: ""
+   isLoggedIn: false,
+   token: "",
+   isAuthenticated: false,
+   favourites: [],
+   username: ""
 }

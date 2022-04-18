@@ -2,12 +2,24 @@ import { useState } from 'react';
 import styles from './Styles.module.scss';
 import LogRegForm from '../LogRegForm';
 
-
+/**
+ * Component LogRegPanel
+ * @component
+ * @example
+ *  <LogRegPanel /> 
+ */
 const LogRegPanel = () => {
 	const login = 1;
 	const register = 0;
 
     const [tab, setTab] = useState(login);
+
+
+	/**
+     * Handles click on button tabs and changes the state
+	 * @async
+	 * @fires setTab
+     */
 	const handleTabLog = () => setTab(login);
 	const handleTabReg = () => setTab(register);
 

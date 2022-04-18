@@ -4,6 +4,12 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import MainCharPanel from "../components/MainCharPanel";
 
+/**
+ * Component Page Characters
+ * @component
+ * @example
+ *  <Characters /> 
+ */
 const Characters = () => {
     const dispatch = useDispatch();
     useEffect(() => {

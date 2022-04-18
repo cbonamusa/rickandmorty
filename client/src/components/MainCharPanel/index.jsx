@@ -4,26 +4,43 @@ import Card from '../Card';
 import styles from './Styles.module.scss';
 import * as charServices from '../../../services/characters.service';
 
+
+/**
+ * Component MainCharPanel
+ * @component
+ * @example
+ *  <MainCharPanel /> 
+ */
 const MainCharPanel = () => {
 	const showCharacters = 0;
 	const showFavourites = 1;
 
-   	const [tab, setTab] = useState(showCharacters);
+   const [tab, setTab] = useState(showCharacters);
 	const [favData, setFavData] = useState([])
 
 	const { characters }= useSelector((state) => state.characters);
 	const { favourites } = useSelector((state) => state.user );
 
-	const handleTabCharacters = () =>  setTab(showCharacters)  ;
-	const handleTabFav = () =>   setTab(showFavourites);
+   /**
+   * Handles click on button tabs and changes the state
+	* @async
+	* @fires setTab
+   */
+	const handleTabCharacters = () => setTab(showCharacters);
+	const handleTabFav = () => setTab(showFavourites);
 	
-
+	/**
+	 * Map the favourites array, get objects for each of them and pass it to state
+	 * @throws getFavCharacter
+	 * @fires setFavData
+	 * @async
+	 */
 	const getFavFromAPI = async () => {
 		let dataFromApi =  await favourites?.map(id => {
 			return charServices.getFavCharacter(id)
-					.then(resp => resp.data)
-					.then(result => result)
-					.catch(error => console.log(error))
+				.then(resp => resp.data)
+				.then(result => result)
+				.catch(error => console.log(error))
 		});
 		await Promise.all(dataFromApi).then(result => {
 			setFavData(result);

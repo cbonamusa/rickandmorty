@@ -4,8 +4,8 @@ import usersReducer from "./users/users.reducer"
 
 
 const appReducers = () => combineReducers({
-    characters: characterReducer,
-    user: usersReducer
+   characters: characterReducer,
+   user: usersReducer
 });
 
 
