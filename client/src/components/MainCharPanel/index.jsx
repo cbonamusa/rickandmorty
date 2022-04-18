@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import Card from '../Card';
 import styles from './Styles.module.scss';
 import * as charServices from '../../../services/characters.service';
-import * as userServices from '../../../services/user.service';
-
-
 
 const MainCharPanel = () => {
 	const showCharacters = 0;
@@ -18,32 +15,56 @@ const MainCharPanel = () => {
 	const { favourites } = useSelector((state) => state.user );
 	const user = useSelector((state) => state.user);
 
-
-
-	const handleTabCharacters = () => setTab(showCharacters);
-	const handleTabFav = () =>  setTab(showFavourites);
+	const handleTabCharacters = () =>  setTab(showCharacters)  ;
+	const handleTabFav = () =>   setTab(showFavourites);
 	
+	/** USIN BD SERVER */
+	// const getFavFromAPI = async () => {
+	// 	console.log('enter functiooooon')
+
+	// 	const favs = await userServices.favouritesFromServer(user.username);
+	// 	favs[0].favourites?.map(id => {
+	// 		charServices.getFavCharacter(id)
+	// 		.then(resp => resp.data )
+	// 		.then(result => {
+	// 			const alreadyExist = favData.some(fav => {
+	// 				if (fav.id === result.id) {
+	// 					return true;
+	// 				} 
+	// 			})
+	// 			if (!alreadyExist && tab === showFavourites) {
+	// 				setFavData((prev) => ([...prev, result]));
+	// 			}
+	// 		})
+	// 		.catch(error => console.log(error))
+	// 	});
+	// }
+
+
+	/** USING REDUX */
 	const getFavFromAPI = async () => {
-		const favs = await userServices.favouritesFromServer(user.username);
-		favs[0].favourites?.map(id => {
+		console.log('enter functiooooon', favourites)
+		await favourites?.map(id => {
 			charServices.getFavCharacter(id)
-			.then(resp => resp.data )
-			.then(result => {
-				const alreadyExist = favData.some(fav => {
-					if (fav.id === result.id) {
-						return true;
-					} 
+				.then(resp => resp.data )
+				.then(result => {
+					const alreadyExist = favData.some(fav => {
+						if (fav.id === result.id) {
+							return true;
+						} 
+					})
+					if (!alreadyExist  && result != undefined) {
+						setFavData((prev) => ([...prev, result]));
+					}
 				})
-				if (!alreadyExist && tab === showFavourites) {
-					setFavData((prev) => ([...prev, result]));
-				}
-			})
-			.catch(error => console.log(error))
+				.catch(error => console.log(error))
 		});
 	}
 
 	useEffect(() => {
-		getFavFromAPI();
+		if ( tab === showFavourites) {
+			getFavFromAPI();
+		}
 	}, [tab])
 
 
@@ -76,21 +97,18 @@ const MainCharPanel = () => {
 					(favData.length == 0) ? (
 						<h3>You don't have any Favourite characters yet!</h3>
 					) : (
-						<>
-							{/* <button type="button" onClick={handleRefresh}><img src="/refreshIcon.png" width={25} /></button> */}
-							<div className={styles.showCharactersContainer}>
-								{favData?.map(character => (
-									<Card key={`fav-${character.id}`}
-										id={character.id}
-										img={character.image}
-										name={character.name}
-										location={character.location.name}
-										gender={character.gender}
-										species={character.species}
-									/>
-								))}
-							</div>
-						</>
+						<div className={styles.showCharactersContainer}>
+							{favData?.map(character => (
+								<Card key={`fav-${character.id}`}
+									id={character.id}
+									img={character.image}
+									name={character.name}
+									location={character.location.name}
+									gender={character.gender}
+									species={character.species}
+								/>
+							))}
+						</div>
 					)
 				)}	
 			</div>						

@@ -14,9 +14,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json()); //Middleware to get body's parsed as json
 
-/*
- * Serve the Frontend
- */
+/* Serve the Frontend */
 app.use(express.static('../../client/dist'));
 
 
@@ -44,7 +42,7 @@ app.post('/api/user/favourites', (req, resp) => {
     .catch(err => resp.send(err))
 });
 
-/* Users routes - register login  */
+/* Users routes - register login and favs db */
 require('./users/users.routes').addRoutes(app);
 
 

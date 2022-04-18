@@ -20,8 +20,6 @@ const Card = ({
     const dispatch= useDispatch();
     const user = useSelector((state) => state.user);
     const notInitialRender = useRef(false);
-    //const { favourites } = useSelector((state) => state.user );
-
 
     const handleFavourites = (e) => {
         e.preventDefault();
@@ -33,7 +31,9 @@ const Card = ({
         
     const addFavourites = async (characterId) => {
         try {
-           await userServices.addFavouritesService(characterId, user.username);
+            await userServices.addFavouritesService(characterId, user.username);
+            updateFavs();
+
         } catch(error) {
             console.log(error)
         }  
@@ -41,7 +41,9 @@ const Card = ({
 
     const removeFavourites = async (characterId) => {
         try {
-         await userServices.removeFromFavourites(characterId, user.username);
+            await userServices.removeFromFavourites(characterId, user.username);
+            updateFavs();
+
         } catch(error) {
             console.log(error);
         }  
@@ -49,8 +51,6 @@ const Card = ({
 
     const getAndSaveFavourites = async () => {
         const favs = await userServices.favouritesFromServer(user.username);
-        dispatch(updateFavouritesAction( favs[0].favourites ));
-
         favs[0].favourites?.map(fav => {
             if (fav == id) {
                 setIsFav((prev) => ({...prev, fav:true}))
@@ -58,22 +58,25 @@ const Card = ({
         });
     };
 
+    const updateFavs = async () => {
+        const favs = await userServices.favouritesFromServer(user.username);
+        dispatch(updateFavouritesAction( favs[0].favourites ));
+    }
  
     useEffect(() => {
+        updateFavs();
         if (notInitialRender.current) {
             isFav.fav ? ( addFavourites(isFav.favouriteId) ) : ( removeFavourites(isFav.favouriteId));
         } else {
             getAndSaveFavourites();
         }
+     
         notInitialRender.current = false;
-
-
     }, [isFav.fav]);
 
-    //PENDING TODO: Get the already favourites and change it's state from initial state (false) to true!!!
     return (
         <div className={styles.card} key={id} >
-            <img src={img} />
+            <img className={styles.charPicture} src={img} />
             <div className={styles.contentCard}>
                 <div className={styles.contentCard_visible}>
                     <h4>{name}</h4>

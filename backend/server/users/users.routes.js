@@ -69,7 +69,7 @@ const login = async (req, resp, next) => {
 
 const addFavourites = async (req, resp, next) => {
     try {
-         const userUpdateFavourites = await User.findOneAndUpdate(
+        const userUpdateFavourites = await User.findOneAndUpdate(
             {username: req.body.username},
             {$push: { favourites: req.body.favourites }}
         );
