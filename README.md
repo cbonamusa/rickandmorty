@@ -8,8 +8,7 @@ FRONTEND:
         vitejs
         react
         redux
-        react-router
-        axios
+        router
 
 BACKEND: 
  /users_db

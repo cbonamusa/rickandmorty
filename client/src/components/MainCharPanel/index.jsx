@@ -13,52 +13,21 @@ const MainCharPanel = () => {
 
 	const { characters }= useSelector((state) => state.characters);
 	const { favourites } = useSelector((state) => state.user );
-	const user = useSelector((state) => state.user);
 
 	const handleTabCharacters = () =>  setTab(showCharacters)  ;
 	const handleTabFav = () =>   setTab(showFavourites);
 	
-	/** USIN BD SERVER */
-	// const getFavFromAPI = async () => {
-	// 	console.log('enter functiooooon')
 
-	// 	const favs = await userServices.favouritesFromServer(user.username);
-	// 	favs[0].favourites?.map(id => {
-	// 		charServices.getFavCharacter(id)
-	// 		.then(resp => resp.data )
-	// 		.then(result => {
-	// 			const alreadyExist = favData.some(fav => {
-	// 				if (fav.id === result.id) {
-	// 					return true;
-	// 				} 
-	// 			})
-	// 			if (!alreadyExist && tab === showFavourites) {
-	// 				setFavData((prev) => ([...prev, result]));
-	// 			}
-	// 		})
-	// 		.catch(error => console.log(error))
-	// 	});
-	// }
-
-
-	/** USING REDUX */
 	const getFavFromAPI = async () => {
-		console.log('enter functiooooon', favourites)
-		await favourites?.map(id => {
-			charServices.getFavCharacter(id)
-				.then(resp => resp.data )
-				.then(result => {
-					const alreadyExist = favData.some(fav => {
-						if (fav.id === result.id) {
-							return true;
-						} 
-					})
-					if (!alreadyExist  && result != undefined) {
-						setFavData((prev) => ([...prev, result]));
-					}
-				})
-				.catch(error => console.log(error))
+		let dataFromApi =  await favourites?.map(id => {
+			return charServices.getFavCharacter(id)
+					.then(resp => resp.data)
+					.then(result => result)
+					.catch(error => console.log(error))
 		});
+		await Promise.all(dataFromApi).then(result => {
+			setFavData(result);
+		})
 	}
 
 	useEffect(() => {
