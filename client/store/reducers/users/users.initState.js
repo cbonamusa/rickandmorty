@@ -1,6 +1,6 @@
 export default {
    isLoggedIn: false,
-   token: "",
+   token: null,
    isAuthenticated: false,
    favourites: [],
    username: ""

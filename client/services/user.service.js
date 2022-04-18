@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000'
+const url = 'http://localhost:5000';
 
 /**
 * Register Request to register a new user 

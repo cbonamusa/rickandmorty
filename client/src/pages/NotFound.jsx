@@ -1,5 +1,3 @@
-import { white } from 'color-name'
-import React from 'react'
 
 
 /**

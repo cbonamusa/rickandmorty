@@ -1,7 +1,7 @@
 import { useDispatch, useSelector} from 'react-redux';
 import {logoutAction} from '../../../store/reducers/users/users.actions';
 import styles from './Styles.module.scss';
-import logo from '/logo.png'
+import logo from '/logo.png';
 
 /**
  * Component Header

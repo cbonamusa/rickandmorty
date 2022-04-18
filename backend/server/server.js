@@ -14,9 +14,6 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json()); //Middleware to get body's parsed as json
 
-/* Serve the Frontend */
-app.use(express.static('../../client/dist'));
-
 
 /* Routes */
 app.get('/api', async (req, res) => {

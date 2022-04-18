@@ -1,5 +1,5 @@
 import styles from './Styles.module.scss';
-import { useState } from 'react'
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginErrorAction, loginSuccessAction} from "../../../store/reducers/users/users.actions";
 import * as services from '../../../services/user.service';

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { loginKeepSession } from '../store/reducers/users/users.actions'
+import { loginKeepSession } from '../store/reducers/users/users.actions';
 
 import Header from "./components/Header";
 import Characters from './pages/Characters';

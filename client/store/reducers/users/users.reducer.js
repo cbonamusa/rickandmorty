@@ -14,7 +14,7 @@ const usersReducer = (state = initialState, {type, payload}) => {
          return {...state, isLoggedIn: true, isAuthenticated: true ,token: payload.token, username: payload.username };
         
       case actionTypes.LOGOUT:
-         return {...state, error: payload, isLoggedIn: false,  token:"", isAuthenticated: false};
+         return {...state, error: payload, isLoggedIn: false,  token:null, isAuthenticated: false};
 
       case actionTypes.UPDATE_FAVOURITES:
          return {...state, favourites: payload }

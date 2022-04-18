@@ -1,5 +1,4 @@
-import Header from "../components/Header";
-import { loadCharacters } from '../../store/reducers/characters/characters.thunks'
+import { loadCharacters } from '../../store/reducers/characters/characters.thunks';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import MainCharPanel from "../components/MainCharPanel";
