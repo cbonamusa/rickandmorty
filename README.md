@@ -14,7 +14,9 @@ Attention: **Vitejs don't support node version 12! Make sure your node version i
    git clone https://github.com/cbonamusa/rickandmorty.git
    ```
 
-   /backend/users_bd  Notes: *You will need Docker running*
+   Notes: *You will need Docker running* :
+   
+   /backend/users_db  
    ```bash
    docker-compose up -d
    ```
