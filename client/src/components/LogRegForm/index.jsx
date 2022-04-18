@@ -39,7 +39,7 @@ const LogRegForm = ({form}) => {
             dispatch(loginErrorAction(error));
 
          } else {
-            setNotification({ type:'ok', text: 'Success' });
+            setNotification({ type:'ok', form:'login', text: 'Success' });
             localStorage.setItem('token', accessToken);
             localStorage.setItem('username', userData.username);
             dispatch(loginSuccessAction(accessToken, userData.username));
@@ -64,7 +64,7 @@ const LogRegForm = ({form}) => {
          if (json.error) {
             setNotification({ type:'error', form:'register', text:json.error.toString() })
          } else {
-            setNotification({ type:'ok', text: 'Success! Your user account is created' });
+            setNotification({ type:'ok', form:'register', text: 'Success! Your user account is created' });
             setUserData({username:'', email:'', password: ''});
          }
       } catch(error) {

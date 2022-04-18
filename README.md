@@ -4,6 +4,7 @@
 This project was bootstrapped with Vite js (Pre-configured Rollup build) using React for the Frontend on the `client` directory. 
 Uses Express for the server and Mongo for the database.
 
+Attention: **Vitejs don't support node version 12! Make sure your node version is updated**
 
 ## Start the project
 
