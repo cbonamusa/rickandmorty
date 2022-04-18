@@ -50,7 +50,7 @@ The React application will run on port `3000` and the server port `5000`.
 
 2. Log in
 
-3. Navigate throw Characters
+3. Enjoy the Characters
 
 ## What I use: 
 
