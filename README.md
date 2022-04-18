@@ -1,10 +1,11 @@
 # Rick & Morty application 
-**React, Express and MongoDB**
+####  React, Express and MongoDB
+
 This project was bootstrapped with Vite js (Pre-configured Rollup build) using React for the Frontend on the `client` directory. 
 Uses Express for the server and Mongo for the database.
 
 
-##Start the project
+## Start the project
 
 1. Cone the project and install the dependencies:
 
@@ -42,7 +43,7 @@ Uses Express for the server and Mongo for the database.
    ```
 The React application will run on port `3000` and the server port `5000`.
 
-##What I use: 
+## What I use: 
 
 1. Frontend
    * [ViteJs](https://vitejs.dev/) : Frontend build tool that bundles your code with Rollup, pre-configured to output highly optimized static assets for production. It's fast for installing and serving.
@@ -65,5 +66,9 @@ The React application will run on port `3000` and the server port `5000`.
 
 
 
-   ##Overview:
+## Overview:
+   #### Login and Register 
+   ![alt text](https://github.com/cbonamusa/rickandmorty/blob/master/client/public/overview2.png?raw=true)
+
+   #### Characters and favourites
    ![alt text](https://github.com/cbonamusa/rickandmorty/blob/master/client/public/overview.png?raw=true)
